@@ -1,0 +1,28 @@
+:root {
+
+    /* Base Color Palette: */
+    --color-1: #dfe085;
+    --color-2: #2d313d;
+    --color-3: #6cb2bf;
+    --color-4: #90c26c;
+    --color-5: #d92b44;
+
+    /* Text Color */
+    --text-color-1: #dfe085;
+    --text-color-2: var(--color-3);
+
+}
+
+$color-1: #dfe085;
+$color-2: #2d313d;
+$color-3: #6cb2bf;
+$color-4: #90c26c;
+$color-5: #d92b44;
+
+$text-color-1: $color-1;
+$text-color-2: $color-3;
+
+$link-color: $color-5;
+$link-color-hover: lighten($link-color, 15%);
+
+$border-radius: 3px;

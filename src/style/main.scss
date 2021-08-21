@@ -1,0 +1,32 @@
+@import './variables.scss';
+
+html {
+
+    background-color: var(--color-2);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+
+}
+
+a {
+
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover {
+
+        color: $link-color-hover;
+        text-decoration: underline;
+
+    }
+
+}
+
+a,
+input,
+button {
+
+    transition: all .1s linear;
+
+}

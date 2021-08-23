@@ -36,8 +36,9 @@ export default {
 
 .main-template {
 
-    margin: 1rem auto;
+    margin: 0 auto;
     max-width: 600px;
+    padding: 1rem .5rem;
 
 }
 

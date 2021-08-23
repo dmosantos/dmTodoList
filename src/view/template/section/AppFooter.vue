@@ -22,9 +22,11 @@ export default {
 
 .app-footer {
 
+    border-top: 1px solid lighten($color-2, 8%);
     color: var(--text-color-2);
     font-size: .85rem;
     margin: 0;
+    padding: 1rem 0;
     text-align: center;
 
     a {

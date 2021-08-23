@@ -3,7 +3,7 @@
         :class="$style.newTaskTitleInput"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        placeholder="Descrição da tarefa..."
+        placeholder="Adicionar tarefa..."
         required
         autofocus
     />

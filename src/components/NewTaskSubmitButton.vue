@@ -1,7 +1,7 @@
 <template>
     <button :class="$style.newTaskSubmitButton" title="Adicionar tarefa...">
 
-        <icon symbol="plus" />
+        <icon symbol="plus" :class="$style.newTaskSubmitButtonIcon" />
 
     </button>
 </template>
@@ -20,7 +20,7 @@ export default {
 
 @import '@/style/variables.scss';
 
-.newTaskSubmitButton {
+.new-task-submit-button {
 
     align-items: center;
     background-color: $color-4;
@@ -35,6 +35,12 @@ export default {
     &:hover {
 
         background-color: lighten($color-4, 10%);
+
+    }
+
+    &__icon {
+
+        fill: #fff;
 
     }
 

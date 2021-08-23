@@ -22,10 +22,12 @@ export default {
 
 <style lang="scss" module>
 
+@import '@/style/variables.scss';
+
 .icon {
 
     display: inline-block;
-    fill: #fff;
+    fill: var(--color-2);
     height: 1em;
     vertical-align: top;
     width: 1em;

@@ -36,6 +36,8 @@ export default {
 
             this.$emit('insert-task', this.taskTitle);
 
+            this.taskTitle = null;
+
         }
 
     }

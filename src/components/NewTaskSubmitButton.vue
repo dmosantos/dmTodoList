@@ -40,7 +40,7 @@ export default {
 
     &__icon {
 
-        fill: #fff;
+        fill: #fff!important;
 
     }
 

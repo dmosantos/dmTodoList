@@ -6,10 +6,12 @@
     --color-3: #6cb2bf;
     --color-4: #90c26c;
     --color-5: #d92b44;
-
+    --color-6: #777;
+    
     /* Text Color */
-    --text-color-1: #dfe085;
+    --text-color-1: var(--color-1);
     --text-color-2: var(--color-3);
+    --text-color-3: var(--color-6);
 
 }
 

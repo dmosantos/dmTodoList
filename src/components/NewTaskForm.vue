@@ -1,5 +1,5 @@
 <template>
-    <form :class="$style.newTaskForm" @submit.prevent="insert">
+    <form :class="$style.newTaskForm" @submit.prevent="newTask">
 
         <NewTaskTitleInput v-model="taskTitle" />
 
@@ -32,9 +32,9 @@ export default {
 
     methods: {
 
-        insert() {
+        newTask() {
 
-            this.$emit('insert-task', this.taskTitle);
+            this.$emit('new-task', this.taskTitle);
 
             this.taskTitle = null;
 

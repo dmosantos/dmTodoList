@@ -2,14 +2,14 @@
     <MainTemplate>
 
         <NewTaskForm
-            @insertTask="newTask"
+            @newTask="newTask"
         />
 
         <TaskList
             title="Para Fazer"
             empty-list-text="Nenhuma tarefa para fazer... Adicione novas tarefas preenchendo o campo acima."
             :tasks="todoTasks"
-            @deleteTask="removeTask"
+            @removeTask="removeTask"
             @checkTask="checkTask"
         />
 
@@ -17,7 +17,7 @@
             title="Concluído"
             empty-list-text="Nenhuma tarefa finalizada..."
             :tasks="doneTasks"
-            @deleteTask="removeTask"
+            @removeTask="removeTask"
             @checkTask="checkTask"
         />
 

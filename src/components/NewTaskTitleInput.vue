@@ -4,6 +4,7 @@
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         placeholder="Adicionar tarefa..."
+        maxlength="500"
         required
         autofocus
     />

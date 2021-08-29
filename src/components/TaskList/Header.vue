@@ -82,6 +82,7 @@ export default {
     &--collapsed {
 
         border-bottom: 1px solid lighten($color-2, 8%);
+        margin-bottom: -1px;
 
     }
 

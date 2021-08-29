@@ -1,7 +1,7 @@
 <template>
     <MainTemplate>
 
-        <NewTaskForm
+        <NewTask
             @newTask="newTask"
         />
 
@@ -19,6 +19,7 @@
             :tasks="doneTasks"
             @removeTask="removeTask"
             @checkTask="checkTask"
+            :collapsed="true"
         />
 
     </MainTemplate>
@@ -29,8 +30,8 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import MainTemplate from '@/view/template/MainTemplate';
-import NewTaskForm from '@/components/NewTaskForm';
-import TaskList from '@/components/TaskList';
+import NewTask from '@/components/NewTask/NewTask';
+import TaskList from '@/components/TaskList/TaskList';
 
 export default {
   
@@ -38,7 +39,7 @@ export default {
 
     components: {
         MainTemplate,
-        NewTaskForm,
+        NewTask,
         TaskList
     },
 

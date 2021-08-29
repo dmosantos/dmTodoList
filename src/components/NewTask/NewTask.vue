@@ -1,25 +1,25 @@
 <template>
     <form :class="$style.newTaskForm" @submit.prevent="newTask">
 
-        <NewTaskTitleInput v-model="taskTitle" />
+        <TitleInput v-model="taskTitle" />
 
-        <NewTaskSubmitButton />
+        <SubmitButton />
 
     </form>
 </template>
 
 <script>
 
-import NewTaskTitleInput from './NewTaskTitleInput';
-import NewTaskSubmitButton from './NewTaskSubmitButton';
+import TitleInput from './TitleInput';
+import SubmitButton from './SubmitButton';
 
 export default {
 
     name: 'NewTaskForm',
 
     components: {
-        NewTaskTitleInput,
-        NewTaskSubmitButton
+        TitleInput,
+        SubmitButton
     },
 
     data() {

@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss" module>
 
-@import '@/style/variables.scss';
+@import '@/style/_variables.scss';
 
 .app-footer {
 

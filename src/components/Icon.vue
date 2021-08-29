@@ -22,8 +22,6 @@ export default {
 
 <style lang="scss" module>
 
-@import '@/style/variables.scss';
-
 .icon {
 
     display: inline-block;

@@ -3,7 +3,7 @@
         :class="$style.newTaskTitleInput"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        placeholder="Adicionar tarefa..."
+        placeholder="Nome da nova tarefa..."
         maxlength="500"
         required
         autofocus
@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss" module>
 
-@import '@/style/variables.scss';
+@import '@/style/_variables.scss';
 
 .new-task-title-input {
 
@@ -42,6 +42,16 @@ export default {
 
         outline: none;
 
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .new-task-title-input {
+
+        border-radius: 0;
+        
     }
 
 }

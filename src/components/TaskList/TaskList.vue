@@ -1,69 +1,88 @@
 <template>
-    <div :class="$style.taskListContainer">
+    <section :class="$style.taskListContainer">
         
-        <h2 :class="$style.title">{{ $props.title }}</h2>
+        <Header
+            :title="title"
+            :counter="tasks.length"
+            v-model:collapsed="isCollapsed"
+        />
+        
+        <transition name="task-list">
 
-        <ul v-if="$props.tasks.length" :class="$style.taskList">
+            <div v-show="!isCollapsed">
             
-            <li
-                v-for="(task, i) in getTasks"
-                :key="task.id"
-                :ref="el => { if (el) lis[i] = el }"
-                :class="[$style.taskListItem, editing == task.id ? $style.taskListItemEditing : null]"
-            >
-                
-                <span :class="$style.taskListButtons">
-                
-                    <a @click="$emit('checkTask', task)" :class="[$style.taskListButton, $style.taskListButtonCheck]" title="Marcar como concluído" href="javascript:void(0);">
-                        <icon :symbol="task.checked ? 'check-square' : 'square'" />
-                    </a>
-
-                </span>
-                
-                <span
-                    v-if="editing != task.id"
-                    @click="edit(task, i)"
-                    :class="[$style.taskListTitle, task.checked ? $style.taskListTitleChecked : null]"
-                >{{ task.title }}</span>
-
-                <textarea
-                    v-else
-                    ref="input"
-                    v-model="task.title"
-                    type="text"
-                    maxlength="500"
-                    :class="[$style.taskListTitle, $style.taskListTitleEditing]"
-                    :style="{ height: editInputHeight + 'px' }"
-                    @blur="save(task)"
-                    @keyup.enter="save(task)"
-                ></textarea>
-
-                <span :class="[$style.taskListButtons, $style.taskListButtonsToggle]">
-                
-                    <a v-if="!task.checked" @click="edit(task, i)" :class="[$style.taskListButton, $style.taskListButtonDelete]" title="Editar tarefa" href="javascript:void(0);">
-                        <icon symbol="pencil-square" />
-                    </a>
+                <ul v-if="tasks.length" :class="$style.taskList">
                     
-                    <a @click="$emit('removeTask', task)" :class="[$style.taskListButton, $style.taskListButtonDelete]" title="Excluir tarefa" href="javascript:void(0);">
-                        <icon symbol="trash" />
-                    </a>
+                    <li
+                        v-for="(task, i) in getTasks"
+                        :key="task.id"
+                        :ref="el => { if (el) lis[i] = el }"
+                        :class="[$style.taskListItem, editing == task.id ? $style.taskListItemEditing : null]"
+                    >
+                        
+                        <span :class="$style.taskListButtons">
+                        
+                            <a @click="$emit('checkTask', task)" :class="[$style.taskListButton, $style.taskListButtonCheck]" title="Marcar como concluído" href="javascript:void(0);">
+                                <icon :symbol="task.checked ? 'check-square' : 'square'" />
+                            </a>
 
-                </span>
-            
-            </li>
+                        </span>
+                        
+                        <span
+                            v-if="editing != task.id"
+                            @click="edit(task, i)"
+                            :class="[$style.taskListTitle, task.checked ? $style.taskListTitleChecked : null]"
+                        >{{ task.title }}</span>
+
+                        <textarea
+                            v-else
+                            ref="input"
+                            v-model="task.title"
+                            type="text"
+                            maxlength="500"
+                            :class="[$style.taskListTitle, $style.taskListTitleEditing]"
+                            :style="{ height: editInputHeight + 'px' }"
+                            @blur="save(task)"
+                            @keyup.enter="save(task)"
+                        ></textarea>
+
+                        <span :class="[$style.taskListButtons, $style.taskListButtonsToggle]">
+                        
+                            <a v-if="!task.checked" @click="edit(task, i)" :class="[$style.taskListButton, $style.taskListButtonDelete]" title="Editar tarefa" href="javascript:void(0);">
+                                <icon symbol="pencil-square" />
+                            </a>
+                            
+                            <a @click="$emit('removeTask', task)" :class="[$style.taskListButton, $style.taskListButtonDelete]" title="Excluir tarefa" href="javascript:void(0);">
+                                <icon symbol="trash" />
+                            </a>
+
+                        </span>
+                    
+                    </li>
+                
+                </ul>
+
+                <p v-else :class="$style.emptyList">{{ emptyListText }}</p>
+
+            </div>
         
-        </ul>
+        </transition>
 
-        <p v-else :class="$style.emptyList">{{ $props.emptyListText }}</p>
-
-    </div>
+    </section>
 </template>
 
 <script>
 
 import { ref, onBeforeUpdate } from 'vue';
+import Header from './Header.vue';
+import Icon from '../Icon.vue';
 
 export default {
+
+    components: {
+        Header,
+        Icon
+    },
 
     name: 'TaskList',
 
@@ -87,7 +106,11 @@ export default {
             type: String,
             default: 'Nenhuma tarefa...'
         },
-        tasks: Array
+        tasks: Array,
+        collapsed: {
+            type: Boolean,
+            default: false
+        }
 
     },
 
@@ -95,7 +118,8 @@ export default {
         return {
 
             editing: null,
-            editInputHeight: null
+            editInputHeight: null,
+            isCollapsed: this.$props.collapsed
 
         }
     },
@@ -104,7 +128,7 @@ export default {
 
         getTasks() {
 
-            return this.$props.tasks;
+            return this.tasks;
 
         }
 
@@ -145,19 +169,11 @@ export default {
 
 <style lang="scss" module>
 
-@import '@/style/variables.scss';
+@import '@/style/_variables.scss';
 
 .task-list-container {
 
     margin-bottom: 1rem;
-
-}
-
-.title {
-
-    color: var(--color-1);
-    margin: 0;
-    padding: 1rem 0 1rem 0;
 
 }
 
@@ -336,6 +352,42 @@ export default {
     color: lighten($color-2, 50%);
     margin: 0;
 
+}
+
+@media (max-width: 600px) {
+
+    .task-list__item {
+            
+        &:first-child {
+
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+        }
+
+        &:last-child {
+
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+
+        }
+
+    }
+
+}
+
+</style>
+
+<style>
+
+.task-list-enter-active,
+.task-list-leave-active {
+    transition: opacity .2s ease;
+}
+
+.task-list-enter-from,
+.task-list-leave-to {
+    opacity: 0;
 }
 
 </style>

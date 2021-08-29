@@ -46,4 +46,14 @@ export default {
 
 }
 
+@media (max-width: 600px) {
+
+    .new-task-submit-button {
+
+        border-radius: 0;
+
+    }
+    
+}
+
 </style>

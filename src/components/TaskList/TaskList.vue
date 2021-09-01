@@ -5,9 +5,10 @@
             :title="title"
             :counter="tasks.length"
             v-model:collapsed="isCollapsed"
+            v-model:search="search"
         />
-        
-        <transition name="task-list">
+
+        <transition name="fade">
 
             <div v-show="!isCollapsed">
             
@@ -119,7 +120,8 @@ export default {
 
             editing: null,
             editInputHeight: null,
-            isCollapsed: this.$props.collapsed
+            isCollapsed: this.$props.collapsed,
+            search: null
 
         }
     },
@@ -128,7 +130,9 @@ export default {
 
         getTasks() {
 
-            return this.tasks;
+            return this.search
+                ? this.tasks.filter(task => task.title.includes(this.search))
+                : this.tasks;
 
         }
 
@@ -169,11 +173,10 @@ export default {
 
 <style lang="scss" module>
 
-@import '@/style/_variables.scss';
-
 .task-list-container {
 
     margin-bottom: 1rem;
+    color: var(--secundary-text-color);
 
 }
 
@@ -194,8 +197,6 @@ export default {
 
         &:hover {
 
-            // background-color: lighten($color-1, 20%);
-
             .task-list__buttons--toggle {
 
                 display: flex;
@@ -206,21 +207,21 @@ export default {
 
         &:first-child {
 
-            border-top-left-radius: $border-radius;
-            border-top-right-radius: $border-radius;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
 
         }
 
         &:last-child {
 
-            border-bottom-left-radius: $border-radius;
-            border-bottom-right-radius: $border-radius;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
 
         }
 
         &--editing:after {
 
-            background-color: var(--color-1);
+            background-color: var(--theme-color);
             bottom: 0;
             content: '';
             height: 4px;
@@ -303,7 +304,6 @@ export default {
 
         svg {
 
-            fill: var(--text-color-3);
             transition: all .1s ease;
 
         }
@@ -311,7 +311,7 @@ export default {
         &:after {
 
             content: '';
-            border-color: var(--color-2) transparent transparent transparent;
+            border-color: var(--bg-color) transparent transparent transparent;
             border-style: solid;
             border-width: 6px;
             height: 6px;
@@ -374,20 +374,6 @@ export default {
 
     }
 
-}
-
-</style>
-
-<style>
-
-.task-list-enter-active,
-.task-list-leave-active {
-    transition: opacity .2s ease;
-}
-
-.task-list-enter-from,
-.task-list-leave-to {
-    opacity: 0;
 }
 
 </style>

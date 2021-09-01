@@ -30,7 +30,7 @@ export default {
 
 .app-logo {
 
-    color: var(--color-1);
+    color: var(--theme-color);
     letter-spacing: -.1em;
     margin-bottom: 2rem;
     text-align: center;

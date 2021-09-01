@@ -84,3 +84,22 @@ export default {
 @import '@/style/main.scss';
 
 </style>
+
+<style>
+
+.fade-enter-active,
+.fade-leave-active {
+    
+    transition: opacity .2s ease, transform .2s ease;
+
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    
+    opacity: 0;
+    transform: translateY(-.5rem);
+
+}
+
+</style>

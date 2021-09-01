@@ -14,7 +14,7 @@
 
 export default {
 
-    name: 'NewTaskTitleInput',
+    name: 'Input',
 
     props: {
 
@@ -28,12 +28,10 @@ export default {
 
 <style lang="scss" module>
 
-@import '@/style/_variables.scss';
-
 .new-task-title-input {
 
     background-color: #fff;
-    border-radius: $border-radius 0 0 $border-radius;
+    border-radius: var(--border-radius);
     border: 0 none;
     flex-grow: 1;
     padding: 1rem;

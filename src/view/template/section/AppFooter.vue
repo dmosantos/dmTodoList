@@ -18,12 +18,9 @@ export default {
 
 <style lang="scss" module>
 
-@import '@/style/_variables.scss';
-
 .app-footer {
 
-    border-top: 1px solid lighten($color-2, 8%);
-    color: var(--text-color-2);
+    border-top: 1px solid var(--color-2);
     font-size: .85rem;
     margin: 0;
     padding: 1rem 0;
@@ -31,11 +28,11 @@ export default {
 
     a {
 
-        color: $color-1;
+        color: var(--theme-color);
 
         &:hover {
 
-            color: lighten($color-1, 15%);
+            color: var(--theme-color-hover);
 
         }
 

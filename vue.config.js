@@ -7,6 +7,11 @@ module.exports = {
                     localIdentName: '[name]-[hash]'
                 },
                 localsConvention: 'camelCase'
+            },
+            sass: {
+                additionalData: `
+                    @import "@/style/_variables.scss";
+                `
             }
         }
     },

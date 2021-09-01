@@ -1,7 +1,7 @@
 <template>
     <form :class="$style.newTaskForm" @submit.prevent="newTask">
 
-        <TitleInput v-model="taskTitle" />
+        <Input :class="$style.newTaskFormInput" v-model="taskTitle" />
 
         <SubmitButton />
 
@@ -10,7 +10,7 @@
 
 <script>
 
-import TitleInput from './TitleInput';
+import Input from '@/components/Form/Input';
 import SubmitButton from './SubmitButton';
 
 export default {
@@ -18,7 +18,7 @@ export default {
     name: 'NewTaskForm',
 
     components: {
-        TitleInput,
+        Input,
         SubmitButton
     },
 
@@ -52,6 +52,12 @@ export default {
 
     display: flex;
     margin-bottom: 1rem;
+
+    &__input {
+
+        border-radius: var(--border-radius) 0 0 var(--border-radius);
+
+    }
 
 }
 

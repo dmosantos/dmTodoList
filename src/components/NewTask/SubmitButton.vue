@@ -23,9 +23,9 @@ export default {
 .new-task-submit-button {
 
     align-items: center;
-    background-color: $color-4;
+    background-color: var(--theme-color);
     border: 0 none;
-    border-radius: 0 $border-radius $border-radius 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
     color: #fff;
     cursor: pointer;
     display: flex;
@@ -34,13 +34,13 @@ export default {
 
     &:hover {
 
-        background-color: lighten($color-4, 10%);
+        background-color: var(--theme-color-hover);
 
     }
 
     &__icon {
 
-        fill: #fff!important;
+        fill: var(--bg-color);
 
     }
 

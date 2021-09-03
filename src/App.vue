@@ -81,6 +81,11 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@100;300;400;700;900&display=swap');
 @import '~normalize.css';
+
+</style>
+
+<style lang="scss">
+
 @import '@/style/main.scss';
 
 </style>

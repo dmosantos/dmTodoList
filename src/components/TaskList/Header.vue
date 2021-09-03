@@ -14,7 +14,7 @@
             <transition name="fade">
 
                 <a
-                    v-if="!isCollapsed"
+                    v-if="showSearchButton"
                     :class="[$style.headerIcon, isOpenedSearch ? $style.headerIconActive : null]"
                     title="Pesquisar"
                     @click="searchToggle"
@@ -109,6 +109,16 @@ export default {
             isOpenedSearch: false
 
         }
+    },
+
+    computed: {
+
+        showSearchButton() {
+
+            return !this.isCollapsed && this.counter;
+
+        }
+
     },
 
     watch: {

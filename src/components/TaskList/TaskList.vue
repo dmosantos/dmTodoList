@@ -12,7 +12,7 @@
 
             <div v-show="!isCollapsed">
             
-                <ul v-if="tasks.length" :class="$style.taskList">
+                <ul v-if="getTasks.length" :class="$style.taskList">
                     
                     <li
                         v-for="(task, i) in getTasks"
@@ -33,7 +33,8 @@
                             v-if="editing != task.id"
                             @click="edit(task, i)"
                             :class="[$style.taskListTitle, task.checked ? $style.taskListTitleChecked : null]"
-                        >{{ task.title }}</span>
+                            v-html="!search ? task.title : task.title.replace(search, `<strong>${search}</strong>`)"
+                        ></span>
 
                         <textarea
                             v-else
@@ -63,6 +64,8 @@
                 
                 </ul>
 
+                <p v-else-if="search" :class="$style.emptyList">Nenhuma tarefa localizada ao buscar <strong>"{{ search }}"</strong>.</p>
+                
                 <p v-else :class="$style.emptyList">{{ emptyListText }}</p>
 
             </div>

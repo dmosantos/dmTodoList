@@ -4,7 +4,7 @@
         <!-- App Logo -->
         <div :class="$style.appLogo">
             <span :class="$style.appLogoSignature">dm</span>
-            <span :class="$style.appLogoName">TodoList</span>
+            <span :class="$style.appLogoName">ToDoList</span>
         </div>
 
     </header>

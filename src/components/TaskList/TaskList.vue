@@ -31,7 +31,7 @@
                         
                         <span
                             v-if="editing != task.id"
-                            @click="edit(task, i)"
+                            @click="editTask(task, i)"
                             :class="[$style.taskListTitle, task.checked ? $style.taskListTitleChecked : null]"
                             v-html="!search ? task.title : task.title.replace(search, `<strong>${search}</strong>`)"
                         ></span>
@@ -44,17 +44,18 @@
                             maxlength="500"
                             :class="[$style.taskListTitle, $style.taskListTitleEditing]"
                             :style="{ height: editInputHeight + 'px' }"
-                            @blur="save(task)"
-                            @keyup.enter="save(task)"
+                            @blur="saveTask(task)"
+                            @keydown.enter.prevent="saveTask(task)"
+                            required
                         ></textarea>
 
                         <span :class="[$style.taskListButtons, $style.taskListButtonsToggle]">
                         
-                            <a v-if="!task.checked" @click="edit(task, i)" :class="[$style.taskListButton, $style.taskListButtonDelete]" title="Editar tarefa" href="javascript:void(0);">
+                            <a v-if="!task.checked" @click="editTask(task, i)" :class="[$style.taskListButton, $style.taskListButtonDelete]" title="Editar tarefa" href="javascript:void(0);">
                                 <icon symbol="pencil-square" />
                             </a>
                             
-                            <a @click="$emit('removeTask', task)" :class="[$style.taskListButton, $style.taskListButtonDelete]" title="Excluir tarefa" href="javascript:void(0);">
+                            <a @click="deleteTask(task)" :class="[$style.taskListButton, $style.taskListButtonDelete]" title="Excluir tarefa" href="javascript:void(0);">
                                 <icon symbol="trash" />
                             </a>
 
@@ -71,21 +72,19 @@
             </div>
         
         </transition>
-
+    
     </section>
 </template>
 
 <script>
 
 import { ref, onBeforeUpdate } from 'vue';
-import Header from './Header.vue';
-import Icon from '../Icon.vue';
+import Header from './Header';
 
 export default {
 
     components: {
-        Header,
-        Icon
+        Header
     },
 
     name: 'TaskList',
@@ -123,7 +122,9 @@ export default {
 
             editing: null,
             editInputHeight: null,
+            
             isCollapsed: this.$props.collapsed,
+            
             search: null
 
         }
@@ -143,14 +144,14 @@ export default {
 
     methods: {
 
-        edit(task, i) {
+        editTask(task, i) {
 
             if(task.checked)
                 return;
 
             this.editing = task.id;
 
-            this.editInputHeight = this.lis[i].clientHeight;
+            this.editInputHeight = this.lis[i]?.clientHeight || this.editInputHeight;
 
             this.$nextTick(() => {
 
@@ -160,11 +161,22 @@ export default {
 
         },
 
-        save(task) {
+        saveTask(task) {
+
+            if(!task.title) {
+                this.editTask(task);
+                return;
+            }
 
             this.editing = null;
 
-            this.$store.dispatch('saveTask', task);
+            this.$emit('saveTask', task);
+
+        },
+
+        deleteTask(task) {
+
+            this.$emit('deleteTask', task);
 
         }
 

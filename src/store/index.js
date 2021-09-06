@@ -1,11 +1,10 @@
-import { createStore } from 'vuex'
-import { uuid } from 'vue-uuid'
+import { createStore } from 'vuex';
 
 export default createStore({
     
     state: {
 
-        tasks: []
+        tasks: [],
 
     },
     
@@ -25,9 +24,10 @@ export default createStore({
 
         },
 
-        updateTask(state, task) {
+        updateTask(state, task, index) {
 
-            state.tasks[state.tasks.indexOf(task)] = task;
+            task.title = task.title?.trim();
+            state.tasks[index] = task;
 
             localStorage.setItem('tasks', JSON.stringify(state.tasks));
 
@@ -45,6 +45,12 @@ export default createStore({
 
     getters: {
 
+        allTasks(state) {
+
+            return state.tasks;
+
+        },
+        
         todoTasks(state) {
 
             return state.tasks.filter(task => !task.checked);
@@ -61,36 +67,21 @@ export default createStore({
     
     actions: {
 
-        newTask(context, taskTitle) {
-
-            const task = {
-                id: uuid.v4(),
-                title: taskTitle,
-                checked: false
-            }
-
-            context.commit('insertTask', task);
-
-        },
-
-        removeTask(context, task) {
-
-            if(confirm(`Deseja realmente excluir a tarefa?\n\n"${task.title}"`))
-                context.commit('deleteTask', task);
-
-        },
-
         saveTask(context, task) {
 
-            context.commit('updateTask', task);
+            const index = context.getters.allTasks.indexOf(task);
+
+            if(index >= 0)
+                context.commit('updateTask', task, index);
+            else
+                context.commit('insertTask', task);
+
 
         },
 
-        checkTask(context, task) {
+        deleteTask(context, task) {
 
-            task.checked = !task.checked;
-
-            context.commit('updateTask', task);
+            context.commit('deleteTask', task);
 
         }
 

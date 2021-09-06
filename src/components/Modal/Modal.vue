@@ -105,7 +105,7 @@ export default {
 .container {
 
     overflow: auto;
-    padding: 2rem;
+    padding: 2rem .5rem;
     z-index: 2;
 
 }
@@ -113,7 +113,7 @@ export default {
 .dialog {
 
     margin: 0 auto;
-    width: 400px;
+    max-width: 400px;
 
 }
 

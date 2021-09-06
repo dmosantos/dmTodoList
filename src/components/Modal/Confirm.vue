@@ -80,11 +80,17 @@ export default {
         
         confirm() {
 
+            if(!this.$props.show)
+                return;
+
             this.$emit('confirm');
 
         },
 
         cancel() {
+
+            if(!this.$props.show)
+                return;
 
             this.$emit('cancel');
 
